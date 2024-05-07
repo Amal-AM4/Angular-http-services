@@ -7,11 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent {
+  posts: any = [];
+
   private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
   constructor(private http: HttpClient) {
     http.get(this.apiUrl)
     .subscribe(response => {
-      console.log(response)
+      this.posts = response;
     });
   }
 }
