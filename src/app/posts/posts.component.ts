@@ -16,4 +16,21 @@ export class PostsComponent {
       this.posts = response;
     });
   }
+
+  createPost(input: HTMLInputElement) {
+    let post = { title: input.value, id: 0 };
+    input.value = '';
+
+    this.http.post(this.apiUrl, JSON.stringify(post))
+    .subscribe(response => {
+      const postWithId = response as { id: number }; // Assert response has id
+
+      post.id = postWithId.id;
+      // this.posts.splice(0, 0, post);
+
+      console.log(post);
+      console.log(response);
+    });
+  }
+
 }
