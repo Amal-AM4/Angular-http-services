@@ -33,4 +33,21 @@ export class PostsComponent {
     });
   }
 
+  updatePost(post: any) {
+    // this.http.put(this.apiUrl, JSON.stringify(post))
+    this.http.patch(this.apiUrl + '/' + post.id, JSON.stringify({ isRead: true }))
+    .subscribe(response => {
+      console.log(response);
+
+    })
+  }
+
+  deletePost(post: any) {
+    this.http.delete(this.apiUrl + '/' + post.id)
+    .subscribe(response => {
+      let index = this.posts.indexOf(post);
+      this.posts.splice(index, 1);
+    });
+  }
+
 }
